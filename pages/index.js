@@ -1,7 +1,10 @@
 // changing a "loading..." to server side rendering
 // import NavBar from "../Components/NavBar";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Seo from "../Components/Seo";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+
 
 // export default function Home(){
 //     const [movies,setMovies] = useState();
@@ -14,15 +17,46 @@ import { useEffect, useState } from "react";
 //     },[]);
 
 export default function Home({results}){
+    const router = useRouter();
+    const onClick = (id, title)=>{
+        // router.push({
+        //     pathname: `/movies/${id}`,
+        //     query:{
+        //         title,
+        //     },
+        // },
+        // `/movies/${id}`
+        // );
+        router.push(`/movies/${title}/${id}`);
+    };
     return(
         <div className="container">
             <Seo title='Home'/>
             {/* {!movies && <h4>Loading...</h4>} */}
             {/* {movies?.map((movie)=>( */}
             {results?.map((movie)=>( 
-                <div className="movie" key={movie.id}>
+                // <div className="movie" key={movie.id}>
+                <div onClick={()=>onClick(movie.id, movie.original_title)}
+                    className="movie"
+                    key={movie.id}
+                >
                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-                    <h4>{movie.original_title}</h4>
+                    {/* <h4>{movie.original_title}</h4> */}
+                    <h4>
+                        {/* <Link href={{
+                            pathname: `/movies/${movie.id}`,
+                            query: {
+                                title: movie.original_title,
+                            },
+                            }}
+                            as={`/movies/${movie.id}`} >
+                            <a>{movie.original_title}</a>
+                        </Link> */}
+                        {/* <Link href={`/movies/${movie.original_title}/${movie.id}`}>
+                            <a>{movie.original_title}</a>
+                        </Link> */}
+                        {movie.original_title}
+                    </h4>
                 </div>
             ))}
             <style jsx>{`
