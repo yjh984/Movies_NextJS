@@ -28,6 +28,7 @@ export default function Home({results}){
         // `/movies/${id}`
         // );
         router.push(`/movies/${title}/${id}`);
+        // router.push(`/movies/${id}`);
     };
     return(
         <div className="container">
