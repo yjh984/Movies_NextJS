@@ -1,9 +1,10 @@
 // import { useRouter } from "next/router";
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import Seo from "../../Components/Seo";
+// import { useEffect } from "react/cjs/react.development";
 
-export default function detail({params}){
+
+export default function Detail({params}){
     // const router = useRouter();
     const [title,id]=params || [];
     

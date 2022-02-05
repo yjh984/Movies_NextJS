@@ -5,7 +5,9 @@ export default function About(){
     return (
         <div>
             <Seo title='About'/>
-            <h1> About! </h1>
+            <div> Made with NextJS..</div>
+            <div>
+                Movies data come from TMDB. </div>
         </div>
     )
 }
