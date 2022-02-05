@@ -8,16 +8,17 @@ import Seo from "../../Components/Seo";
 export default function Detail(){
     const router = useRouter();
     // const [title,id]=params || [];
-    // console.log(router.isReady);
+    console.log(router.isReady);
     // const id = router.query.params[1];
     
     const [picks,setPicks] = useState();
     useEffect(()=>{
         {router.isReady && (async()=>{
             const data = await (
-                await fetch(`/api/movies/${router.query.params[1]}`)).json();
-            setPicks(data);
-            // console.log("done");
+                // await fetch(`/api/movies/${router.query.params[1]}`)).json();
+                await fetch(`https://api.themoviedb.org/3/movie/${router.query.params[1]}?api_key=86a83c6c1fef5751afd154d66d80258e`)).json();
+                setPicks(data);
+            console.log(data);
         })()};
         // console.log('picks:'+picks);
     },[router]);

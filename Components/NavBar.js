@@ -7,11 +7,11 @@ export default function NavBar(){
         <nav>
             <img src={process.env.BACKEND_URL+'/logo.png'}/>
             <div>
-                <Link href='/' as={'/'+process.env.BACKEND_URL}>
+                <Link href='/' as={process.env.BACKEND_URL+'/'}>
                     <a className={router.pathname==='/'? 'active':''}>Home</a>
                 </Link>
                 {" "}
-                <Link href='/about' as={'/'+process.env.BACKEND_URL+'about'}>
+                <Link href='/about' as={process.env.BACKEND_URL+'/about'}>
                     <a className={router.pathname==='/about'? 'active':''}>About</a>
                 </Link>
             </div>
