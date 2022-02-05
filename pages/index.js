@@ -2,10 +2,10 @@
 // import NavBar from "../Components/NavBar";
 // import Link from "next/link";
 import { useRouter } from "next/router";
-import Seo from "../../Components/Seo";
+import Seo from "../Components/Seo";
 import { useEffect, useState } from "react";
 // import Layout from "../../Components/Layout";
-import NavBar from "../../Components/NavBar";
+import NavBar from "../Components/NavBar";
 
 
 export default function Home(){
@@ -13,7 +13,8 @@ export default function Home(){
     useEffect(()=>{
         (async()=>{
             const {results} = await (
-                await fetch('/api/movies')).json();
+                // await fetch('/api/movies')).json();
+                await fetch('https://api.themoviedb.org/3/movie/popular?api_key=86a83c6c1fef5751afd154d66d80258e')).json();
             setMovies(results);
         })();
     },[]);
@@ -33,7 +34,7 @@ export default function Home(){
         // router.push(`/movies/${id}`);
     };
     return(
-        <><NavBar/>
+        <>
         <div className="container">
             <Seo title='Home'/>
 
@@ -67,9 +68,6 @@ export default function Home(){
             ))}
             <style jsx>{`
                 .container {
-                    max-width: 520px;
-                    width: 100%;
-                    margin: 0 auto;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     padding: 20px;

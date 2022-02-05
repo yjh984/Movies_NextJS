@@ -1,29 +1,30 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import NavBar from "../../../Components/NavBar";
-import Seo from "../../../Components/Seo";
+import NavBar from "../../Components/NavBar";
+import Seo from "../../Components/Seo";
 // import { useEffect } from "react/cjs/react.development";
 
 
 export default function Detail(){
     const router = useRouter();
     // const [title,id]=params || [];
-    // console.log(router.query.params[1]);
+    // console.log(router.isReady);
+    // const id = router.query.params[1];
     
     const [picks,setPicks] = useState();
     useEffect(()=>{
-        (async()=>{
+        {router.isReady && (async()=>{
             const data = await (
                 await fetch(`/api/movies/${router.query.params[1]}`)).json();
             setPicks(data);
-            // console.log(data.vote_average);
-        })();
+            // console.log("done");
+        })()};
         // console.log('picks:'+picks);
-    },[]);
+    },[router]);
 
 
     return (
-        <div ><NavBar/>
+        <div >
         <div className="container">
             {picks&&<Seo title={picks.original_title}/>}
             <h4>{picks&&('* '+picks.original_title)}
@@ -55,9 +56,6 @@ export default function Detail(){
 
             <style jsx>{`
                 .container {
-                    max-width: 520px;
-                    width: 100%;
-                    margin: 0 auto;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     padding: 20px, 0px, 20px, 20px;
@@ -77,9 +75,6 @@ export default function Detail(){
                     text-align: left;
                 }
                 .etc {
-                    max-width: 520px;
-                    width: 100%;
-                    margin: 0 auto;
                 }
             `}</style>
         </div>
