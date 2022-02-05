@@ -1,22 +1,22 @@
 // changing a "loading..." to server side rendering
 // import NavBar from "../Components/NavBar";
-import Link from "next/link";
+// import Link from "next/link";
 import { useRouter } from "next/router";
 import Seo from "../Components/Seo";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 
-// export default function Home(){
-//     const [movies,setMovies] = useState();
-//     useEffect(()=>{
-//         (async()=>{
-//             const {results} = await (
-//                 await fetch('/api/movies')).json();
-//             setMovies(results);
-//         })();
-//     },[]);
+export default function Home(){
+    const [movies,setMovies] = useState();
+    useEffect(()=>{
+        (async()=>{
+            const {results} = await (
+                await fetch('/api/movies')).json();
+            setMovies(results);
+        })();
+    },[]);
 
-export default function Home({results}){
+// export default function Home({results}){
     const router = useRouter();
     const onClick = (id, title)=>{
         // router.push({
@@ -33,9 +33,9 @@ export default function Home({results}){
     return(
         <div className="container">
             <Seo title='Home'/>
-            {/* {!movies && <h4>Loading...</h4>} */}
-            {/* {movies?.map((movie)=>( */}
-            {results?.map((movie)=>( 
+            {!movies && <h4>Loading...</h4>}
+            {movies?.map((movie)=>(
+            // {results?.map((movie)=>( 
                 // <div className="movie" key={movie.id}>
                 <div onClick={()=>onClick(movie.id, movie.original_title)}
                     className="movie"
@@ -57,6 +57,7 @@ export default function Home({results}){
                             <a>{movie.original_title}</a>
                         </Link> */}
                         {movie.original_title}
+                        <span className="rate"> (Rate:{movie.vote_average})</span>
                     </h4>
                 </div>
             ))}
@@ -83,15 +84,19 @@ export default function Home({results}){
                     font-size: 18px;
                     text-align: center;
                 }
+                .movie span{
+                    font-size: 14px;
+                    font-weight: normal;
+                }
             `}</style>
         </div>
     );
 }
 
-export async function getServerSideProps(){
-    const {results} = await(
-        await fetch(`http://localhost:3000/api/movies`)).json();
-    return{
-        props:{results},
-    };
-}
+// export async function getServerSideProps(){
+//     const {results} = await(
+//         await fetch(`http://localhost:3000/api/movies`)).json();
+//     return{
+//         props:{results},
+//     };
+// }
