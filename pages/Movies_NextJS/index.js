@@ -2,8 +2,10 @@
 // import NavBar from "../Components/NavBar";
 // import Link from "next/link";
 import { useRouter } from "next/router";
-import Seo from "../Components/Seo";
+import Seo from "../../Components/Seo";
 import { useEffect, useState } from "react";
+// import Layout from "../../Components/Layout";
+import NavBar from "../../Components/NavBar";
 
 
 export default function Home(){
@@ -27,12 +29,14 @@ export default function Home(){
         // },
         // `/movies/${id}`
         // );
-        router.push(`/movies/${title}/${id}`);
+        router.push(`Movies_NextJS/movies/${title}/${id}`);
         // router.push(`/movies/${id}`);
     };
     return(
+        <><NavBar/>
         <div className="container">
             <Seo title='Home'/>
+
             {!movies && <h4>Loading...</h4>}
             {movies?.map((movie)=>(
             // {results?.map((movie)=>( 
@@ -63,6 +67,9 @@ export default function Home(){
             ))}
             <style jsx>{`
                 .container {
+                    max-width: 520px;
+                    width: 100%;
+                    margin: 0 auto;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     padding: 20px;
@@ -90,6 +97,7 @@ export default function Home(){
                 }
             `}</style>
         </div>
+        </>
     );
 }
 

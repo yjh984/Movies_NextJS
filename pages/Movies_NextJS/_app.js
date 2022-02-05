@@ -1,6 +1,6 @@
 // import NavBar from "../Components/NavBar";
-import st from "../styles/globals.css";  //can be imported in _app.js.
-import Layout from "../Components/Layout";
+import st from "../../styles/globals.css";  //can be imported in _app.js.
+import Layout from "../../Components/Layout";
 
 export default function App({Component, pageProps}){
     return(

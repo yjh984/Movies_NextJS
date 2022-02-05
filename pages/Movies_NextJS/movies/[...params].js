@@ -1,33 +1,36 @@
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Seo from "../../Components/Seo";
+import NavBar from "../../../Components/NavBar";
+import Seo from "../../../Components/Seo";
 // import { useEffect } from "react/cjs/react.development";
 
 
-export default function Detail({params}){
-    // const router = useRouter();
-    const [title,id]=params || [];
+export default function Detail(){
+    const router = useRouter();
+    // const [title,id]=params || [];
+    // console.log(router.query.params[1]);
     
     const [picks,setPicks] = useState();
     useEffect(()=>{
         (async()=>{
             const data = await (
-                await fetch(`/api/movies/${id}`)).json();
+                await fetch(`/api/movies/${router.query.params[1]}`)).json();
             setPicks(data);
             // console.log(data.vote_average);
         })();
+        // console.log('picks:'+picks);
     },[]);
 
 
     return (
-        <div >
+        <div ><NavBar/>
         <div className="container">
-            <Seo title={title}/>
-            <h4>{title}
+            {picks&&<Seo title={picks.original_title}/>}
+            <h4>{picks&&('* '+picks.original_title)}
                 {!picks&&'loading....'}
-                {picks&&<div className="movie">
+                {picks&&(<div className="movie">
                     <img src={`https://image.tmdb.org/t/p/w500${picks.poster_path}`} />
-                </div>}
+                </div>)}
                 {/* {picks?.map((movie)=>(
                     <div key={movie.id}>
                         <h4>{movie.original_title}</h4>
@@ -39,7 +42,7 @@ export default function Detail({params}){
             </div>
         </div>
         <div className="etc">
-            {picks&&<div>
+            {picks&&(<div>
                 <div>
                 . Genres : {picks.genres.map((genre)=>genre.name+', ') }
                 </div><div>
@@ -47,11 +50,14 @@ export default function Detail({params}){
                 </div><div>
                 . Homepage : <a href={picks.homepage}>{picks.homepage}</a>
                 </div>
-            </div>}
+            </div>)}
         </div>
 
             <style jsx>{`
                 .container {
+                    max-width: 520px;
+                    width: 100%;
+                    margin: 0 auto;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     padding: 20px, 0px, 20px, 20px;
@@ -64,25 +70,30 @@ export default function Detail({params}){
                     transition: transform 0.2s ease-in-out;
                     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
                 }
-                .review{
+                .review {
                     padding-top: 40px;
                     // gap: 20px;
                     font-size: 15px;
                     text-align: left;
+                }
+                .etc {
+                    max-width: 520px;
+                    width: 100%;
+                    margin: 0 auto;
                 }
             `}</style>
         </div>
     );
 }
 
-export async function getServerSideProps({params:{params}}){
-    // const {results} = await(
-    //     await fetch(`http://localhost:3000/api/movies`)).json();
-    // console.log("2"+results);
-    return{
-        props:{
-            params,
-            // results,
-        }
-    };
-}
+// export async function getServerSideProps({params:{params}}){
+//     // const {results} = await(
+//     //     await fetch(`http://localhost:3000/api/movies`)).json();
+//     // console.log("2"+results);
+//     return{
+//         props:{
+//             params,
+//             // results,
+//         }
+//     };
+// }

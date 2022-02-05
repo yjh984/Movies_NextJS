@@ -7,17 +7,20 @@ export default function NavBar(){
         <nav>
             <img src='/logo.png'/>
             <div>
-                <Link href='/'>
-                    <a className={router.pathname==='/'? 'active':''}>Home</a>
+                <Link href='/Movies_NextJS/'>
+                    <a className={router.pathname==='/Movies_NextJS/'? 'active':''}>Home</a>
                 </Link>
                 {" "}
-                <Link href='/about'>
-                    <a className={router.pathname==='/about'? 'active':''}>About</a>
+                <Link href='/Movies_NextJS/about'>
+                    <a className={router.pathname==='/Movies_NextJS/about'? 'active':''}>About</a>
                 </Link>
             </div>
 
             <style jsx>{`
                 nav{
+                    max-width: 520px;
+                    width: 100%;
+                    margin: 0 auto;
                     display: flex;
                     gap: 10px;
                     flex-direction: column;
