@@ -5,14 +5,14 @@ export default function NavBar(){
     const router = useRouter();
     return(
         <nav>
-            <img src='/logo.png'/>
+            <img src={process.env.BACKEND_URL+'/logo.png'}/>
             <div>
-                <Link href='/Movies_NextJS/'>
-                    <a className={router.pathname==='/Movies_NextJS/'? 'active':''}>Home</a>
+                <Link href='/' as={'/'+process.env.BACKEND_URL}>
+                    <a className={router.pathname==='/'? 'active':''}>Home</a>
                 </Link>
                 {" "}
-                <Link href='/Movies_NextJS/about'>
-                    <a className={router.pathname==='/Movies_NextJS/about'? 'active':''}>About</a>
+                <Link href='/about' as={'/'+process.env.BACKEND_URL+'about'}>
+                    <a className={router.pathname==='/about'? 'active':''}>About</a>
                 </Link>
             </div>
 

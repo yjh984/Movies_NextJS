@@ -13,8 +13,8 @@ export default function Home(){
     useEffect(()=>{
         (async()=>{
             const {results} = await (
-                // await fetch('/api/movies')).json();
-                await fetch('https://api.themoviedb.org/3/movie/popular?api_key=86a83c6c1fef5751afd154d66d80258e')).json();
+                await fetch('/api/movies')).json();
+                // await fetch('https://api.themoviedb.org/3/movie/popular?api_key=8')).json();
             setMovies(results);
         })();
     },[]);
@@ -30,7 +30,7 @@ export default function Home(){
         // },
         // `/movies/${id}`
         // );
-        router.push(`Movies_NextJS/movies/${title}/${id}`);
+        router.push(process.env.BACKEND_URL+`/movies/${title}/${id}`);
         // router.push(`/movies/${id}`);
     };
     return(

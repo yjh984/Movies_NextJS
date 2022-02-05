@@ -1,6 +1,10 @@
 const API_KEY = process.env.API_KEY;
+const debug = process.env.NODE_ENV !== 'production';
+const name = 'Movies_NextJS';
+
 
 module.exports = {
+  assetPrefix: !debug ? `/${name}/` : '',
   reactStrictMode: true,
   async redirects(){
     return[{
